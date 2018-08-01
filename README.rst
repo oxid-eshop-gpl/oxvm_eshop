@@ -46,7 +46,7 @@ Quick start
 
 .. code:: bash
 
-  git clone -b b-6.0 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
+  git clone -b b-6.1 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
 * Start the VM [#no_dev_option]_:
 
@@ -56,11 +56,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.0-ce
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.0-pe
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.0-ee
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-ee
 
 * Set up your shop via http://www.oxideshop.local/Setup
 
