@@ -27,7 +27,6 @@ php:
   packages:
     - cli
     - intl
-    - mcrypt
     - mysql
     - gd
     - curl
