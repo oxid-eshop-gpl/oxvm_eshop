@@ -62,7 +62,7 @@ Quick start
   # for the Enterprise Edition
   composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-ee
 
-**Attention**: If you plan to facilitate the testing environment in your project, make sure that in your "config.inc.php" the setting "blDelSetupDir" is set to false. This prevents the setup folder from being deleted, which is needed for the shop reseting of the testing environment.
+**Attention**: If you plan to facilitate the testing environment in your project, make sure that in your "config.inc.php" the setting "blDelSetupDir" is set to false. This prevents the setup folder from being deleted, which is needed for the shop resetting of the testing environment.
 
 * Set up your shop via http://www.oxideshop.local/Setup
 
