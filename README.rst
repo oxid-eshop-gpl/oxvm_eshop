@@ -170,7 +170,7 @@ However, it is possible to adjust the configuration of the virtual environment t
 All configuration changes should be done by overriding variables from:
 
 * `default.yml <https://github.com/OXID-eSales/oxvm_base/blob/master/ansible/vars/default.yml>`_ - base vm variables;
-* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/master/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
+* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/b-6.1/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
 
 These overridden values must be placed in ``personal.yml``
 [#personal_git_ignore]_ file at the root level of current repository.
