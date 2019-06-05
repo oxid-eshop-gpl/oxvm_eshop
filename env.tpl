@@ -8,7 +8,7 @@
 COMPILATION_VERSION=v6.1.3
 # host mountpoint for the shop sourcecode files, directory has to exist
 SHOP_DIRECTORY=./data/oxideshop
-SHOP_TESTS_PATH=/var/www/oxidehop/vendor/oxid-esales/oxideshop-ce/tests
+SHOP_TESTS_PATH=/var/www/oxideshop/vendor/oxid-esales/oxideshop-ce/tests
 
 # host mountpoint for the database files, directory has to exist
 DATABASE_DIRECTORY=./data/database

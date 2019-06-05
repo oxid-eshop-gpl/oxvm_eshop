@@ -18,8 +18,8 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 1) `git clone -b docker_developer_preview --recursive https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp`
 1) `cd oxvm_ddp`
-1) `mkdir data/database`
-1) `mkdir data/oxideshop`
+1) `mkdir -p data/database`
+1) `mkdir -p data/oxideshop`
 1) `cp env.tpl .env`
 1) Edit the .env file and enter correct HOST_USER_ID, HOST_GROUP_ID, HOST_USER_NAME and HOST_GROUP_NAME
 1) `echo "127.0.0.1 webserver" | sudo tee -a /etc/hosts`
@@ -36,9 +36,8 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 ### Run Tests
 
-1) docker exec -it oxvm_ddp_php_1 /bin/bash
-1) `./vendor/bin/runtests` for shop integration and unit tests
-1) `./vendor/bin/runtests-selenium` for shop acceptance tests
+1) `docker exec -it oxvm_ddp_php_1 ./vendor/bin/runtests` for shop integration and unit tests
+1) `docker exec -it oxvm_ddp_php_1 ./vendor/bin/runtests-selenium` for shop acceptance tests
 
 ## Compose Services
 
