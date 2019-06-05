@@ -1,21 +1,15 @@
 # OS
 .DS_Store/
 
-# Vagrant
-.vagrant/
-
 # Python
 *.py[cod]
 
 # IDE/editors
 *.swp
 
-# Ansible
-personal.yml
-ansible/*.retry
-
 # Application specific
-oxideshop/
+data/
+.env
 
 # PHPStorm
 /.idea/

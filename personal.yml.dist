@@ -1,5 +1,0 @@
----
-# Override any variable from 'ansible/vars/oxideshop.yml' and 'base_vm/ansible/vars/default.yml'
-#
-# Note: Do not rename this file as `personal.yml` and just leave it empty/unchanged. This will
-# cause an error like "NoMethodError: undefined method `each_pair' for nil:NilClass" to appear.
