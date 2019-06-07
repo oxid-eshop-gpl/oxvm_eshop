@@ -135,6 +135,11 @@ The name for the user, can be retrieved via `id -un`.
 
 The name for the users main group, can be retrieved via `id -gn`.
 
+### PWD
+
+On Linux and Mac OS X systems this environment variable is automatically available and is not needed.
+MS Windows Users  are required to configure this with the project path
+
 ## Troubleshooting
 
 ### Port conflicts

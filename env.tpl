@@ -19,3 +19,6 @@ HOST_USER_ID=[id -u]
 HOST_GROUP_ID=[id -g]
 HOST_USER_NAME=[id -un]
 HOST_GROUP_NAME=[id -gn]
+
+# Required on Microsoft Windows: set the path to your project folder
+#PWD=C:\Users\devel oper\project directory
