@@ -16,13 +16,14 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 ### Setup + Run
 
-1) `git clone -b docker_developer_preview --recursive https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp`
+1) `git clone -b docker_developer_preview https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp`
 1) `cd oxvm_ddp`
-1) `mkdir -p data/database`
-1) `mkdir -p data/oxideshop`
-1) `cp env.tpl .env`
+1) `mkdir -p data/database data/oxideshop`
+1) `cp env.dist .env`
 1) Edit the .env file and enter correct HOST_USER_ID, HOST_GROUP_ID, HOST_USER_NAME and HOST_GROUP_NAME
-1) `echo "127.0.0.1 webserver" | sudo tee -a /etc/hosts`
+1) `echo "127.0.0.1 oxideshop.local www.oxideshop.local" | sudo tee -a /etc/hosts` (only required once)
+1) If you also use the vagrant VM you might need to edit `/etc/hosts` manually and comment out or delete all other occurrences of oxideshop.local, or you choose another naming of your choice
+1) `docker-compose build` (To ensure you get up to date images consider adding `--pull`)
 1) `docker-compose up -d`
 
 ### Access the Demoshop
@@ -88,7 +89,7 @@ Those settings which are being set from existing environment values, have to be 
 
 In this file you can change the different available options.
 
-### COMPILATION_VERSION
+### CE_CONTAINER_VERSION
 
 You can use any of the available tags from https://hub.docker.com/r/oxidesales/oxideshop-docker-ce/tags.
 More info about the build contents is available here https://github.com/OXID-eSales/oxideshop-docker-ce.
@@ -97,7 +98,7 @@ More info about the build contents is available here https://github.com/OXID-eSa
 
 Mountpoint for the shop code. This has to be an existing directory a.e. the suggested directory `./data/oxideshop` is being created as empty directory in the quickstart scenario.
 Only if this directory is empty, the prepared shop code from the container will be deployed into it at the first container-start.
-If you use the same directory to switch between a "-dev" and non "-dev" setup, then you should use different directories as suggested in the "env.tpl" file.
+If you use the same directory to switch between a "-dev" and non "-dev" setup, then you should use different directories as suggested in the "env.dist" file.
 
 ### DATABASE_DIRECTORY
 
@@ -109,15 +110,25 @@ Is mapped as environment parameter in the php service, so this will overwrite th
 Usually will be something like "/var/www/oxideshop/source/Setup"
 
 ### SHOP_TESTS_PATH
+
 Is mapped as environment parameter in the php service, so this will overwrite the value provided in the "test_config.yml" file.
 Commonly used are "/var/www/oxideshop/tests" for the "-dev" installations directly based on https://github.com/OXID-eSales/oxideshop_ce<br>
 or "/var/www/oxideshop/vendor/oxid-esales/oxideshop-ce/tests" for the project installation based on "https://github.com/OXID-eSales/oxideshop_project".
+
+### SSMTP_CONFIG_APPEND
+
+By default this is set to `mailhub=mailhog:8025` and will map the mailhog service with the port 8025 as mailhub target in the php container, meaning that all mails will be send to this service.
+If you change the service name or port in the `docker-compose.yml` remember to change this setting accordingly.
+
+**Notice:** Changing this requires a rebuild via `docker-compose build`.
 
 ### HOST_*
 
 All of the four HOST_* settings have either all to be set or all to be empty.
 
-If you do not set them, then the root account will be used in the container, meaning you will have to use sudo rights for deleting the contents of the mounted directories for the db and php service. 
+If you do not set them, then the root account will be used in the container, meaning you will have to use sudo rights for deleting the contents of the mounted directories for the db and php service.
+
+**Notice:** Changing any of them requires a rebuild via `docker-compose build`. 
 
 #### HOST_USER_ID
 
@@ -138,7 +149,7 @@ The name for the users main group, can be retrieved via `id -gn`.
 ### PWD
 
 On Linux and Mac OS X systems this environment variable is automatically available and is not needed.
-MS Windows Users  are required to configure this with the project path
+MS Windows Users  are required to configure this with the project path.
 
 ## Troubleshooting
 

@@ -24,20 +24,30 @@ services:
     networks:
       - internal
 
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
+    restart: always
+    ports:
+      - 8025:8025
+    networks:
+      - internal
+
   php:
     build:
       context: build
       args:
-        COMPILATION_VERSION: ${COMPILATION_VERSION}
+        CE_CONTAINER_VERSION: ${CE_CONTAINER_VERSION}
         HOST_USER_ID: ${HOST_USER_ID-0}
         HOST_GROUP_ID: ${HOST_GROUP_ID-0}
         HOST_USER_NAME: ${HOST_USER_NAME-root}
         HOST_GROUP_NAME: ${HOST_GROUP_NAME-root}
+        SSMTP_CONFIG_APPEND: ${SSMTP_CONFIG_APPEND}
     restart: always
     environment:
       SHOP_SETUP_PATH: ${SHOP_SETUP_PATH}
       SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
-      SHOP_URL: "http://webserver/"
+      SHOP_URL: "http://oxideshop.local/"
       SELENIUM_SERVER_IP: "selenium"
     #user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
     volumes:
@@ -49,13 +59,15 @@ services:
           propagation: shared
     depends_on:
       - db
+      - mailhog
     networks:
       - internal
 
   webserver:
     image: httpd:2.4
     restart: always
-    hostname: localhost
+    domainname: oxideshop.local
+    hostname: oxideshop
     depends_on:
       - php
     volumes:
@@ -72,15 +84,7 @@ services:
       internal:
         aliases:
           - localhost
-
-  mailhog:
-    image: mailhog/mailhog:latest
-    user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
-    restart: always
-    ports:
-      - 8025:8025
-    networks:
-      - internal
+          - oxideshop.local
 
   selenium:
     image: oxidesales/oxideshop-docker-selenium:S2FF31
