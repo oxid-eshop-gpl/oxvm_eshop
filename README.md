@@ -37,12 +37,12 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 ### Run Tests
 
-1) `docker exec -it oxvm_ddp_php_1 ./vendor/bin/runtests` for shop integration and unit tests
-1) `docker exec -it oxvm_ddp_php_1 ./vendor/bin/runtests-selenium` for shop acceptance tests
+1) `docker-compose exec php ./vendor/bin/runtests` for shop integration and unit tests
+1) `docker-compose exec php ./vendor/bin/runtests-selenium` for shop acceptance tests
 
 ### Execute composer commands
 
-As the code directory is the default working space in the php container you can run any composer commands easily like `docker exec -it oxvm_ddp_php_1 composer -V` or `docker exec -it oxvm_ddp_php_1 composer why oxid-esales/oxideshop-composer-plugin`.
+As the code directory is the default working space in the php container you can run any composer commands easily like `docker-compose exec php composer -V` or `docker-compose exec php composer why oxid-esales/oxideshop-composer-plugin`.
 
 ## Compose Services
 
@@ -54,11 +54,11 @@ See troubleshooting ports if your port 3306 is already in use.
 ### php
 
 To deal with file ownership issues it is not possible to use oxidesales/oxideshop-docker-ce directly.<br>
-Instead a custom build container is created from build/Dockerfile, which is based on oxidesales/oxideshop-docker-ce and will make your host user available within the container.
+Instead a custom build container is created from build_php/Dockerfile, which is based on oxidesales/oxideshop-docker-ce and will make your host user available within the container.
 
-If oxidesales/oxideshop-docker-ce is not available on dockerhub, but you have access to https://github.com/OXID-eSales/oxideshop-docker-ce you can create the image like this:
-1) `git@github.com:OXID-eSales/oxideshop-docker-ce.git`
-1) `cd oxideshop-docker-ce/`
+If oxidesales/oxideshop-docker-ce is not available on dockerhub, but you have access to https://github.com/OXID-eSales/docker you can create the image like this:
+1) `git@github.com:OXID-eSales/docker.git`
+1) `cd docker/ce`
 1) `./build.sh -t project -s v6.1.3`
 1) `./build.sh -t dev -s v6.1.3`
 
@@ -94,6 +94,10 @@ In this file you can change the different available options.
 You can use any of the available tags from https://hub.docker.com/r/oxidesales/oxideshop-docker-ce/tags.
 More info about the build contents is available here https://github.com/OXID-eSales/oxideshop-docker-ce.
 
+Of course you can build the shopcontainer on your own or adapt the Dockerfile according to your needs.
+
+**Notice:** Changing this requires a rebuild via `docker-compose build`.
+
 ### SHOP_DIRECTORY
 
 Mountpoint for the shop code. This has to be an existing directory a.e. the suggested directory `./data/oxideshop` is being created as empty directory in the quickstart scenario.
@@ -107,7 +111,8 @@ Mountpoint for the binary db server files. An empty directory has to be availabl
 ### SHOP_SETUP_PATH
 
 Is mapped as environment parameter in the php service, so this will overwrite the value provided in the "test_config.yml" file.
-Usually will be something like "/var/www/oxideshop/source/Setup"
+Usually will be something like "/var/www/oxideshop/source/Setup".
+Needs to be a valid entry as some resources of the shop setup are required in scripts, a.e. `reset-shop`.
 
 ### SHOP_TESTS_PATH
 
@@ -122,13 +127,21 @@ If you change the service name or port in the `docker-compose.yml` remember to c
 
 **Notice:** Changing this requires a rebuild via `docker-compose build`.
 
+### WITH_XDEBUG
+
+By default this is set to 1, meaning it is enabled. Set to 0 to disable xdebug.
+
+**Notice:** Changing this requires a rebuild via `docker-compose build`.
+
+**Notice 2:** IDE integration is still work in progress. Contributions are welcome.
+
 ### HOST_*
 
 All of the four HOST_* settings have either all to be set or all to be empty.
 
 If you do not set them, then the root account will be used in the container, meaning you will have to use sudo rights for deleting the contents of the mounted directories for the db and php service.
 
-**Notice:** Changing any of them requires a rebuild via `docker-compose build`. 
+**Notice:** Changing any of these values requires a rebuild via `docker-compose build`. 
 
 #### HOST_USER_ID
 
