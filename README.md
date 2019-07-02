@@ -28,8 +28,8 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 ### Access the Demoshop
 
-* Shop: http://webserver/
-* Administration: http://webserver/admin/ - User: "admin" / Password: "admin"
+* Shop: http://www.oxideshop.local/
+* Administration: http://www.oxideshop.local/admin/ - User: "admin" / Password: "admin"
 
 ### Access the Selenium Desktop
 
