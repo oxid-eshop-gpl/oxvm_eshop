@@ -34,6 +34,7 @@ php:
     - bcmath
     - mbstring
     - soap
+    - sqlite3
   composer:
     prestissimo:
       install: true
