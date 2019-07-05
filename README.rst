@@ -210,7 +210,7 @@ Setting up Varnish
 
 **Notice:** Varnish integration is a feature of the Enterprise Edition (EE) of the OXID eShop.
 
-The following steps are required to successfully activate varnish:
+The following steps are required to successfully activate varnish and are described in detail below:
 
 * Trigger Varnish installation in the VM
 * Download and install composer package
@@ -218,8 +218,6 @@ The following steps are required to successfully activate varnish:
 * Restart Varnish service
 * Update OXID eShop ``config.inc.php``
 * Update OXID eShop admin settings
-
-The above steps are described with more detail below.
 
 Trigger Varnish installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -252,7 +250,7 @@ OXID eShop version independent way to download the package:
     composer https://varnish.packages.oxid-esales.com/
 
   # Download the actual package
-  composer global require oxid-esales/varnish-configuration
+  composer global require oxid-esales/varnish-configuration:dev-master
 
 Now the package has been downloaded into the global ``vendor`` directory
 and we can transfer the configuration files into the system by using these commands:
