@@ -18,7 +18,6 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 1) `git clone -b docker_developer_preview https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp`
 1) `cd oxvm_ddp`
-1) `mkdir -p data/database data/oxideshop`
 1) `cp env.dist .env`
 1) Edit the .env file and enter correct HOST_USER_ID, HOST_GROUP_ID, HOST_USER_NAME and HOST_GROUP_NAME
 1) `echo "127.0.0.1 oxideshop.local www.oxideshop.local" | sudo tee -a /etc/hosts` (only required once)
@@ -71,6 +70,7 @@ See troubleshooting ports if your port 80 is already in use.
 
 Based on mailhog/mailhog:latest this provides the sendmail target for the shop.
 Mails will not be sent to the real world, but hogged by Mailhog.
+The MailHog web-interface should be available at http://oxideshop.local:8025.
 
 ### selenium
 
@@ -97,16 +97,6 @@ More info about the build contents is available here https://github.com/OXID-eSa
 Of course you can build the shopcontainer on your own or adapt the Dockerfile according to your needs.
 
 **Notice:** Changing this requires a rebuild via `docker-compose build`.
-
-### SHOP_DIRECTORY
-
-Mountpoint for the shop code. This has to be an existing directory a.e. the suggested directory `./data/oxideshop` is being created as empty directory in the quickstart scenario.
-Only if this directory is empty, the prepared shop code from the container will be deployed into it at the first container-start.
-If you use the same directory to switch between a "-dev" and non "-dev" setup, then you should use different directories as suggested in the "env.dist" file.
-
-### DATABASE_DIRECTORY
-
-Mountpoint for the binary db server files. An empty directory has to be available at the first container start.
 
 ### SHOP_SETUP_PATH
 

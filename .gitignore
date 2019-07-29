@@ -8,7 +8,10 @@
 *.swp
 
 # Application specific
-data/
+data/database/*
+!data/database/.gitkeep
+data/oxideshop/*
+!data/oxideshop/.gitkeep
 .env
 
 # PHPStorm
