@@ -4,17 +4,11 @@ services:
 
   db:
     image: mysql:5.7
-    user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
     restart: always
-    volumes:
-      - type: bind
-        source: ${PWD}/data/database
-        target: /var/lib/mysql
-        consistency: delegated
-        bind:
-          propagation: private
     ports:
       - "3306:3306"
+    volumes:
+      - db-vol:/var/lib/mysql
     environment:
       MYSQL_DATABASE: oxid
       MYSQL_USER: root
@@ -109,3 +103,6 @@ services:
 
 networks:
   internal:
+
+volumes:
+  db-vol:
