@@ -1,9 +1,12 @@
-PHONY: install permissions
+PHONY: init permissions up
 
-up: install
+up:
 	docker-compose up -d
 
-install: data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php
+init: data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up
+	docker-compose exec php vendor/bin/reset-shop
+
+composer: data/oxideshop/vendor/
 
 data/oxideshop/vendor/: data/oxideshop/composer.lock
 	docker-compose run --rm --no-deps php composer install
@@ -28,3 +31,10 @@ permissions: data/oxideshop/ data/oxideshop/source/config.inc.php
 
 data/oxideshop/source/config.inc.php: data/oxideshop/source/config.inc.php.dist
 	cp data/oxideshop/source/config.inc.php.dist data/oxideshop/source/config.inc.php
+	sed -i -e 's/<dbHost>/db/' \
+	    -e 's/<dbUser>/root/' \
+	    -e 's/<dbName>/oxid/' \
+	    -e 's/<dbPwd>/oxid/' \
+	    -e 's/<sShopURL>/http:\/\/oxideshop.local\//' \
+	    -e 's/<sShopDir>/\/var\/www\/oxideshop\/source/' \
+	    -e 's/<sCompileDir>/\/var\/www\/oxideshop\/source\/tmp/' data/oxideshop/source/config.inc.php
