@@ -43,7 +43,6 @@ services:
       SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
       SHOP_URL: "http://oxideshop.local/"
       SELENIUM_SERVER_IP: "selenium"
-    #user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
     volumes:
       - type: bind
         source: ${PWD}/data/oxideshop
