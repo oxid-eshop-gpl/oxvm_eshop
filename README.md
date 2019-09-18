@@ -100,15 +100,6 @@ Those settings which are being set from existing environment values, have to be 
 
 In this file you can change the different available options.
 
-### CE_CONTAINER_VERSION
-
-You can use any of the available tags from https://hub.docker.com/r/oxidesales/oxideshop-docker-ce/tags.
-More info about the build contents is available here https://github.com/OXID-eSales/oxideshop-docker-ce.
-
-Of course you can build the shopcontainer on your own or adapt the Dockerfile according to your needs.
-
-**Notice:** Changing this requires a rebuild via `docker-compose build`.
-
 ### SHOP_SETUP_PATH
 
 Is mapped as environment parameter in the php service, so this will overwrite the value provided in the "test_config.yml" file.
@@ -151,14 +142,6 @@ The UID for the user, can be retrieved via `id -u`.
 #### HOST_GROUP_ID
 
 The GID for the users main group, can be retrieved via `id -g`.
-
-#### HOST_USER_NAME
-
-The name for the user, can be retrieved via `id -un`.
-
-#### HOST_GROUP_NAME
-
-The name for the users main group, can be retrieved via `id -gn`.
 
 ### PWD
 
