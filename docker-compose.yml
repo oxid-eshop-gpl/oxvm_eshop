@@ -106,7 +106,7 @@ services:
       context: build/sphinx/
     volumes:
       - type: bind
-        source: ${PWD}/developer_documentation/
+        source: ${PWD}/data/dev-doc/
         target: /doc
         consistency: consistent
         bind:
