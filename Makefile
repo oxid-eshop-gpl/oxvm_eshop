@@ -5,8 +5,11 @@ dev-doc: data/dev-doc/build/
 up:
 	docker-compose up -d
 
-init: data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up
+init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up
 	docker-compose exec php vendor/bin/reset-shop
+
+.env: .env.dist
+	cp .env.dist .env
 
 composer: data/oxideshop/vendor/
 
