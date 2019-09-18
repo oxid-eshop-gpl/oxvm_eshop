@@ -37,11 +37,13 @@ Sit back and relax.
 ### Access the Demoshop
 
 * Shop: http://www.oxideshop.local/
-* Administration: http://www.oxideshop.local/admin/ - User: "admin" / Password: "admin"
+* Administration: http://www.oxideshop.local/admin/
+  * User: `admin`
+  * Password: `admin`
 
 ### Access the Selenium Desktop
 
-* With any VNC viewer open up "localhost", the password is "secret".
+* With any VNC viewer open up `localhost`, the password is `secret`.
 
 ### Run Tests
 
