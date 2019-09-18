@@ -14,16 +14,25 @@ Any pull requests with improvements are welcome. Honorable mentions will be put 
 
 ## Quickstart
 
-### Setup + Run
+### Prepare
 
-1) `git clone -b docker_developer_preview https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp`
-1) `cd oxvm_ddp`
-1) `cp env.dist .env`
-1) Edit the .env file and enter correct HOST_USER_ID, HOST_GROUP_ID, HOST_USER_NAME and HOST_GROUP_NAME
-1) `echo "127.0.0.1 oxideshop.local www.oxideshop.local" | sudo tee -a /etc/hosts` (only required once)
-1) If you also use the vagrant VM you might need to edit `/etc/hosts` manually and comment out or delete all other occurrences of oxideshop.local, or you choose another naming of your choice
-1) `docker-compose build` (To ensure you get up to date images consider adding `--pull`)
-1) `docker-compose up -d`
+To be able to call the shop via a DNS name, you need to add the URL to your `hosts` file:
+
+```bash
+$ echo "127.0.0.1 oxideshop.local www.oxideshop.local" | sudo tee -a /etc/hosts
+```
+
+If your local user has another `uid` than 1000 or another `gid` than 1000, you may need to manually copy the `.env.dist` file to `.env` and change the `HOST_USER_ID` and `HOST_GROUP_ID` to your user and group id. When in doupt just execute the `id` command.
+
+### Setup
+
+```bash
+$ git clone -b docker_developer_preview https://github.com/OXID-eSales/oxvm_eshop.git oxvm_ddp
+$ cd oxvm_ddp
+$ make init
+```
+
+Sit back and relax.
 
 ### Access the Demoshop
 
