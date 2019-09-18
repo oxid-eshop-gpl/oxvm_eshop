@@ -99,6 +99,20 @@ services:
           propagation: shared
       - /dev/shm:/dev/shm
 
+  sphinx:
+    restart: "no"
+    build:
+      context: build/sphinx/
+    volumes:
+      - type: bind
+        source: ${PWD}/developer_documentation/
+        target: /doc
+        consistency: consistent
+        bind:
+          propagation: shared
+    working_dir: /doc
+    user: "${HOST_USER_ID-0}:${HOST_GROUP_ID-0}"
+
 networks:
   internal:
 

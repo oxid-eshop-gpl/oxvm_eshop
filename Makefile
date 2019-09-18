@@ -1,4 +1,6 @@
-PHONY: init permissions up
+PHONY: init permissions up dev-doc
+
+dev-doc: developer_documentation/build/
 
 up:
 	docker-compose up -d
@@ -38,3 +40,9 @@ data/oxideshop/source/config.inc.php: data/oxideshop/source/config.inc.php.dist
 	    -e 's/<sShopURL>/http:\/\/oxideshop.local\//' \
 	    -e 's/<sShopDir>/\/var\/www\/oxideshop\/source/' \
 	    -e 's/<sCompileDir>/\/var\/www\/oxideshop\/source\/tmp/' data/oxideshop/source/config.inc.php
+
+developer_documentation/build/: developer_documentation/
+	docker-compose run sphinx sphinx-build ./ ./build
+
+developer_documentation/:
+	git clone git@github.com:OXID-eSales/developer_documentation.git developer_documentation
