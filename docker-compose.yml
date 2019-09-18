@@ -33,8 +33,6 @@ services:
       args:
         HOST_USER_ID: ${HOST_USER_ID-0}
         HOST_GROUP_ID: ${HOST_GROUP_ID-0}
-        HOST_USER_NAME: ${HOST_USER_NAME-root}
-        HOST_GROUP_NAME: ${HOST_GROUP_NAME-root}
         MSMTP_CONFIG_APPEND: ${MSMTP_CONFIG_APPEND}
         WITH_XDEBUG: ${WITH_XDEBUG-1}
     restart: always
