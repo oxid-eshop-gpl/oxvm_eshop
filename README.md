@@ -22,7 +22,7 @@ To be able to call the shop via a DNS name, you need to add the URL to your `hos
 $ echo "127.0.0.1 oxideshop.local www.oxideshop.local" | sudo tee -a /etc/hosts
 ```
 
-If your local user has another `uid` than `1000` or another `gid` than `1000`, you may need to manually copy the `.env.dist` file to `.env` and change the `HOST_USER_ID` and `HOST_GROUP_ID` to your user and group id. When in doupt just execute the `id` command.
+If your local user has another `uid` than `1000` or another `gid` than `1000`, you may need to manually copy the `.env.dist` file to `.env` and change the `HOST_USER_ID` and `HOST_GROUP_ID` to your user and group id. When in doubt just execute the `id` command.
 
 ### Setup
 
