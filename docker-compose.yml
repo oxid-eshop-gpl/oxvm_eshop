@@ -51,6 +51,7 @@ services:
         consistency: consistent
         bind:
           propagation: shared
+      - ${PWD}/build/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     depends_on:
       - db
       - mailhog
