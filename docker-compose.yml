@@ -48,6 +48,12 @@ services:
         consistency: consistent
         bind:
           propagation: shared
+      - type: bind
+        source: ${PWD}/data/composer
+        target: /home/oxid/.composer/
+        consistency: consistent
+        bind:
+          propagation: shared
       - ${PWD}/build/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     depends_on:
       - db
