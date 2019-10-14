@@ -1,12 +1,17 @@
-PHONY: init permissions up dev-doc
+PHONY: init permissions up dev-doc tests reset
+
+tests:
+	docker-compose exec php vendor/bin/runtests
+
+reset:
+	docker-compose exec php vendor/bin/reset-shop
 
 dev-doc: data/dev-doc/build/
 
 up:
 	docker-compose up -d
 
-init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php dev-doc up
-	docker-compose exec php vendor/bin/reset-shop
+init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php dev-doc up reset
 
 .env: .env.dist
 	cp .env.dist .env
@@ -22,7 +27,7 @@ data/oxideshop/composer.lock: data/oxideshop/composer.json
 data/oxideshop/composer.json: data/oxideshop/
 
 data/oxideshop/:
-	git clone --depth=1 https://github.com/OXID-eSales/oxideshop_ce.git data/oxideshop
+	git clone git@github.com:OXID-eSales/oxideshop_ce.git data/oxideshop
 
 permissions: data/oxideshop/ data/oxideshop/source/config.inc.php
 	chmod 777 data/oxideshop/source/tmp/ \
