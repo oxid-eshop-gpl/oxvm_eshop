@@ -1,7 +1,11 @@
-PHONY: init permissions up dev-doc tests reset
+PHONY: init permissions up dev-doc test reset coverage
 
-tests:
+test:
 	docker-compose exec php vendor/bin/runtests
+	docker-compose exec php vendor/bin/runtests-selenium
+
+coverage:
+	docker-compose exec php vendor/bin/runtests-coverage
 
 reset:
 	docker-compose exec php vendor/bin/reset-shop
