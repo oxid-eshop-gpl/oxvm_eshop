@@ -1,4 +1,6 @@
-# OXID eShop developer environment based on docker 
+# OXID eShop dev env based on docker
+
+![Docker](/assets/docker-vector-logo.svg?raw=true&sanitize=true "Docker")
 
 ## Dependencies
 
