@@ -33,13 +33,11 @@ services:
       args:
         HOST_USER_ID: ${HOST_USER_ID-0}
         HOST_GROUP_ID: ${HOST_GROUP_ID-0}
-        MSMTP_CONFIG_APPEND: ${MSMTP_CONFIG_APPEND}
-        WITH_XDEBUG: ${WITH_XDEBUG-1}
     restart: always
     environment:
       SHOP_SETUP_PATH: ${SHOP_SETUP_PATH}
       SHOP_TESTS_PATH: ${SHOP_TESTS_PATH}
-      SHOP_URL: "http://oxideshop.local/"
+      SHOP_URL: "http://oxideshop.localhost/"
       SELENIUM_SERVER_IP: "selenium"
     volumes:
       - type: bind
@@ -54,7 +52,6 @@ services:
         consistency: consistent
         bind:
           propagation: shared
-      - ${PWD}/build/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     depends_on:
       - db
       - mailhog
@@ -64,7 +61,7 @@ services:
   webserver:
     image: httpd:2.4
     restart: always
-    domainname: oxideshop.local
+    domainname: oxideshop.localhost
     hostname: oxideshop
     depends_on:
       - php
@@ -82,7 +79,7 @@ services:
       internal:
         aliases:
           - localhost
-          - oxideshop.local
+          - oxideshop.localhost
 
   selenium:
     image: oxidesales/oxideshop-docker-selenium:S2FF31

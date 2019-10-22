@@ -1,16 +1,42 @@
-FROM oxidesales/oxideshop-docker-php:7.1
+FROM php:7.1-fpm
 
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
-ARG MSMTP_CONFIG_APPEND
-ARG WITH_XDEBUG
 
-USER root
-RUN groupadd -f -g $HOST_GROUP_ID oxid && \
-    useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid || true && \
-    echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    printf "$MSMTP_CONFIG_APPEND" >> /etc/msmtprc && \
-    if [ "$WITH_XDEBUG" = "1" ] ; then mv /usr/optional_xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini ; fi
+ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc"
+ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev"
+ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli"
+ARG PECL_DEPS="xdebug"
+ARG PHP_MEMORY_LIMIT="-1"
+
+# install dependencies and cleanup (needs to be one step, as else it will cache in the laver)
+RUN apt-get update -y \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        $RUNTIME_PACKAGE_DEPS \
+        $BUILD_PACKAGE_DEPS \
+    && docker-php-ext-configure gd --with-jpeg-dir=/usr/local/ \
+    && docker-php-ext-install -j$(nproc) $PHP_EXT_DEPS \
+    && pecl install $PECL_DEPS \
+    && docker-php-ext-enable xdebug \
+    && docker-php-source delete \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && apt-get purge -y --auto-remove $BUILD_PACKAGE_DEPS \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "sendmail_path=/usr/bin/msmtp -t" > /usr/local/etc/php/conf.d/php-sendmail.ini \
+    && echo "memory_limit = $PHP_MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-limit-php.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && curl --silent --show-error https://getcomposer.org/installer | php \
+    && mv /var/www/html/composer.phar /usr/local/bin/composer \
+    && groupadd -f -g $HOST_GROUP_ID oxid \
+    && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
+    && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && printf "host mailhog\nport 1025" >> /etc/msmtprc
 
 USER oxid
+
 WORKDIR /var/www/oxideshop
