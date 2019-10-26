@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.1-apache
 
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
@@ -35,8 +35,16 @@ RUN apt-get update -y \
     && groupadd -f -g $HOST_GROUP_ID oxid \
     && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
-    && printf "host mailhog\nport 1025" >> /etc/msmtprc
+    && printf "host mailhog\nport 1025" >> /etc/msmtprc \
+    && a2enmod rewrite
 
-USER oxid
+
+ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+ENV APACHE_RUN_USER=oxid
+ENV APACHE_RUN_GROUP=oxid
 
 WORKDIR /var/www/oxideshop

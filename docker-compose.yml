@@ -55,37 +55,18 @@ services:
     depends_on:
       - db
       - mailhog
-    networks:
-      - internal
-
-  webserver:
-    image: httpd:2.4
-    restart: always
     domainname: oxideshop.localhost
     hostname: oxideshop
-    depends_on:
-      - php
-    volumes:
-      - type: bind
-        source: ${PWD}/data/oxideshop
-        target: /var/www/oxideshop
-        consistency: consistent
-        bind:
-          propagation: shared
-      - ${PWD}/config/httpd.conf:/usr/local/apache2/conf/httpd.conf
     ports:
       - 80:80
     networks:
-      internal:
-        aliases:
-          - localhost
-          - oxideshop.localhost
+      - internal
 
   selenium:
     image: oxidesales/oxideshop-docker-selenium:S2FF31
     restart: always
     depends_on:
-      - webserver
+      - php
     ports:
       - 4444:4444
       - 5900:5900

@@ -2,6 +2,7 @@ PHONY: init permissions up dev-doc test reset coverage
 
 test:
 	docker-compose exec php vendor/bin/runtests
+	docker-compose exec php vendor/bin/runtests-codeception
 	docker-compose exec php vendor/bin/runtests-selenium
 
 coverage:
