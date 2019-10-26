@@ -10,5 +10,3 @@ RUN apt-get update && \
     pip install sphinxcontrib-httpdomain && \
     pip install sphinxcontrib_plantuml && \
     java -jar ./usr/share/plantuml/plantuml.jar -testdot
-
-
