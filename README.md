@@ -4,7 +4,7 @@
 
 ## Dependencies
 
-This dev env assumes you have
+This developement environment assumes you have
 
 - `docker` up and running
 - a recent version of `docker-compose` installed
@@ -29,7 +29,7 @@ $ make init
 
 ### Access the Selenium Desktop
 
-* With any VNC viewer open up `localhost`, the password is `secret`.
+With any VNC viewer open up `localhost`, the password is `secret`.
 
 ### Run Tests
 
