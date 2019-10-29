@@ -3,6 +3,7 @@ PHONY: init permissions up dev-doc test reset coverage
 test:
 	docker-compose exec php vendor/bin/runtests
 	docker-compose exec php vendor/bin/runtests-codeception
+	docker-compose up -d selenium
 	docker-compose exec php vendor/bin/runtests-selenium
 
 coverage:
@@ -14,7 +15,7 @@ reset:
 dev-doc: data/dev-doc/build/
 
 up:
-	docker-compose up -d
+	docker-compose up -d php
 
 init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
 
