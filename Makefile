@@ -16,7 +16,7 @@ dev-doc: data/dev-doc/build/
 up:
 	docker-compose up -d
 
-init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php dev-doc up reset
+init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/source/config.inc.php up reset
 
 .env: .env.dist
 	cp .env.dist .env

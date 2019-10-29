@@ -9,6 +9,8 @@ ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli"
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 
+ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
+
 # install dependencies and cleanup (needs to be one step, as else it will cache in the laver)
 RUN apt-get update -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -36,13 +38,9 @@ RUN apt-get update -y \
     && useradd -m -d /home/oxid -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID oxid \
     && echo "oxid ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
     && printf "host mailhog\nport 1025" >> /etc/msmtprc \
-    && a2enmod rewrite
-
-
-ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
-
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+    && a2enmod rewrite \
+    && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 ENV APACHE_RUN_USER=oxid
 ENV APACHE_RUN_GROUP=oxid
