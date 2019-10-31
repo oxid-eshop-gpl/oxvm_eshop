@@ -4,8 +4,8 @@ FROM php:${PHP_VERSION}-apache
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
 
-ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc"
-ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev libzip-dev"
+ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libzip-dev"
+ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev"
 ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli"
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
@@ -18,6 +18,7 @@ RUN apt-get update -y \
         $RUNTIME_PACKAGE_DEPS \
         $BUILD_PACKAGE_DEPS \
     && docker-php-ext-configure gd --with-jpeg-dir=/usr/local/ \
+    && docker-php-ext-configure zip --with-libzip=/usr/include \
     && docker-php-ext-install -j$(nproc) $PHP_EXT_DEPS \
     && pecl install $PECL_DEPS \
     && docker-php-ext-enable xdebug \
