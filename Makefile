@@ -1,16 +1,16 @@
 PHONY: init permissions up dev-doc test reset coverage
 
 test:
-	docker-compose exec -T php vendor/bin/runtests
-	docker-compose exec -T php vendor/bin/runtests-codeception
+	docker-compose exec -T --user oxid php vendor/bin/runtests
+	docker-compose exec -T --user oxid php vendor/bin/runtests-codeception
 	docker-compose up -d selenium
-	docker-compose exec -T php vendor/bin/runtests-selenium
+	docker-compose exec -T --user oxid php vendor/bin/runtests-selenium
 
 coverage:
-	docker-compose exec -T php vendor/bin/runtests-coverage
+	docker-compose exec -T --user oxid php vendor/bin/runtests-coverage
 
 reset:
-	docker-compose exec -T php vendor/bin/reset-shop
+	docker-compose exec -T --user oxid php vendor/bin/reset-shop
 
 dev-doc: data/dev-doc/build/
 
@@ -25,10 +25,10 @@ init: .env data/oxideshop/ permissions data/oxideshop/vendor/ data/oxideshop/sou
 composer: data/oxideshop/vendor/
 
 data/oxideshop/vendor/: data/oxideshop/composer.lock
-	docker-compose run -T --rm --no-deps php composer install
+	docker-compose run -T --rm --no-deps --user oxid php composer install
 
 data/oxideshop/composer.lock: data/oxideshop/composer.json
-	docker-compose run -T --rm --no-deps php composer update
+	docker-compose run -T --rm --no-deps --user oxid php composer update
 
 data/oxideshop/composer.json: data/oxideshop/
 
@@ -56,7 +56,7 @@ data/oxideshop/source/config.inc.php: data/oxideshop/source/config.inc.php.dist
 	    -e 's/<sCompileDir>/\/var\/www\/oxideshop\/source\/tmp/' data/oxideshop/source/config.inc.php
 
 data/dev-doc/build/: data/dev-doc/
-	docker-compose run -T --rm sphinx sphinx-build ./ ./build
+	docker-compose run -T --rm i--user oxid sphinx sphinx-build ./ ./build
 
 data/dev-doc/:
 	git clone git@github.com:OXID-eSales/developer_documentation.git data/dev-doc/
