@@ -54,8 +54,7 @@ services:
     depends_on:
       - db
       - mailhog
-    domainname: oxideshop.localhost
-    hostname: oxideshop
+    hostname: oxideshop.localhost
     ports:
       - 80:80
     networks:
