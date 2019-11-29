@@ -85,7 +85,7 @@ services:
       context: build/sphinx/
     volumes:
       - type: bind
-        source: ${PWD}/data/dev-doc/
+        source: ${PWD}/data/
         target: /doc
         consistency: consistent
         bind:
