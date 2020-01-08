@@ -25,16 +25,18 @@ php:
   zendguard:
     install: false
   packages:
-    - cli
-    - intl
-    - mysql
-    - gd
-    - curl
-    - xml
     - bcmath
+    - cli
+    - curl
+    - gd
+    - intl
+    - ldap
     - mbstring
+    - mysql
     - soap
     - sqlite3
+    - xml
+    - zip
   composer:
     prestissimo:
       install: true
