@@ -4,21 +4,29 @@ FROM php:${PHP_VERSION}-apache
 ARG HOST_USER_ID
 ARG HOST_GROUP_ID
 
-ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libzip-dev"
-ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev"
+ARG RUNTIME_PACKAGE_DEPS="msmtp libfreetype6 libjpeg62-turbo unzip git default-mysql-client sudo rsync liblz4-tool bc libonig5 libzip-dev"
+ARG BUILD_PACKAGE_DEPS="libcurl4-openssl-dev libjpeg-dev libpng-dev libxml2-dev libonig-dev"
 ARG PHP_EXT_DEPS="curl json xml mbstring zip bcmath soap pdo_mysql gd mysqli"
 ARG PECL_DEPS="xdebug"
 ARG PHP_MEMORY_LIMIT="-1"
 
 ENV APACHE_DOCUMENT_ROOT /var/www/oxideshop/source/
 
+SHELL ["/bin/bash", "-c"]
+
 # install dependencies and cleanup (needs to be one step, as else it will cache in the laver)
 RUN apt-get update -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         $RUNTIME_PACKAGE_DEPS \
         $BUILD_PACKAGE_DEPS \
-    && docker-php-ext-configure gd --with-jpeg-dir=/usr/local/ \
-    && docker-php-ext-configure zip --with-libzip=/usr/include \
+    && if [[ $PHP_VERSION = 7.4* ]]; \
+       then docker-php-ext-configure gd --with-jpeg; \
+       else docker-php-ext-configure gd --with-jpeg-dir=/usr/local; \
+       fi \
+    && if [[ $PHP_VERSION = 7.4* ]]; \
+       then docker-php-ext-configure zip; \
+       else docker-php-ext-configure zip --with-libzip=/usr/include; \
+       fi \
     && docker-php-ext-install -j$(nproc) $PHP_EXT_DEPS \
     && pecl install $PECL_DEPS \
     && docker-php-ext-enable xdebug \
