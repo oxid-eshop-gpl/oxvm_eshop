@@ -1,20 +1,11 @@
-# OS
-.DS_Store/
-
-# Python
-*.py[cod]
-
 # IDE/editors
 *.swp
 
 # Application specific
-data/database/*
-!data/database/.gitkeep
 data/oxideshop/*
 !data/oxideshop/.gitkeep
 .env
 
 # PHPStorm
-/.idea/
-/.phpstorm-oxid.meta.php
-/tmp/
+.idea/
+tmp/
