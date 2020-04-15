@@ -48,6 +48,21 @@ Quick start
 
   git clone -b b-6.0 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
+* Start the VM (Robust method on Windows to avoid filesystem issues) [#no_dev_option]_:
+
+.. code:: bash
+
+  cd oxvm_eshop
+  vagrant up
+  vagrant ssh
+  # for the Community Edition
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-ce
+  # for the Professional Edition
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-pe
+  # for the Enterprise Edition
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-ee
+  cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
+
 * Start the VM [#no_dev_option]_:
 
 .. code:: bash
