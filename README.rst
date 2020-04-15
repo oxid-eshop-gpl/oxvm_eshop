@@ -33,6 +33,13 @@ Dependencies
 
 .. [#virtualbox_dependency] VirtualBox is listed as dependency due to the fact that it is the default chosen provider for the VM. In case other providers will be used there is no need to install VirtualBox. Please refer to the list of possible providers in the configuration section to get more information.
 
+.. _`Troubleshooting`
+
+Troubleshooting
+---------------
+
+Please see https://github.com/OXID-eSales/oxvm_base#troubleshooting for resolutions of common known issues.
+
 .. _`Quick start`
 
 Quick start
@@ -63,7 +70,7 @@ Quick start
   composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
-* Start the VM [#no_dev_option]_:
+* Start the VM (Quicker method with direct installation to the shared directory) [#no_dev_option]_:
 
 .. code:: bash
 
