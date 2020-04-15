@@ -22,6 +22,7 @@ mysql:
   user: oxid
   password: oxid
 php:
+  version: 7.0
   zendguard:
     install: false
   packages:
