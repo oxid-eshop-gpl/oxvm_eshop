@@ -53,7 +53,7 @@ Quick start
 
 .. code:: bash
 
-  git clone -b b-6.1 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
+  git clone -b b-6.2 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
 * Start the VM (Robust method on Windows to avoid filesystem issues) [#no_dev_option]_:
 
@@ -63,11 +63,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-ce
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-pe
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-ee
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
 * Start the VM (Quicker method with direct installation to the shared directory) [#no_dev_option]_:
@@ -78,11 +78,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-ce
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-pe
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.1-ee
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-ee
 
 **Attention**: If you plan to facilitate the testing environment in your project, make sure that in your "config.inc.php" the setting "blDelSetupDir" is set to false. This prevents the setup folder from being deleted, which is needed for the shop resetting of the testing environment.
 
@@ -192,7 +192,7 @@ However, it is possible to adjust the configuration of the virtual environment t
 All configuration changes should be done by overriding variables from:
 
 * `default.yml <https://github.com/OXID-eSales/oxvm_base/blob/master/ansible/vars/default.yml>`_ - base vm variables;
-* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/b-6.1/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
+* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/b-6.2/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
 
 These overridden values must be placed in ``personal.yml``
 [#personal_git_ignore]_ file at the root level of current repository.
