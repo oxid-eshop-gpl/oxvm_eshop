@@ -63,11 +63,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-ce
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-pe
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.0-ee
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.1-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
 * Start the VM (Quicker method with direct installation to the shared directory) [#no_dev_option]_:
