@@ -21,6 +21,7 @@ mysql:
   database: oxid
   user: oxid
   password: oxid
+  grants: "`oxid%`.*:ALL"
 php:
   version: 7.4
   zendguard:
