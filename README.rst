@@ -55,7 +55,7 @@ Quick start
 
   git clone -b b-6.2 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
-* Start the VM (Robust method on Windows to avoid filesystem issues) [#no_dev_option]_:
+* Start the VM (Robust method on Windows without Vagrant plugins which denies later "composer require"-s) [#no_dev_option]_:
 
 .. code:: bash
 
@@ -70,7 +70,7 @@ Quick start
   composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
-* Start the VM (Quicker method with direct installation to the shared directory) [#no_dev_option]_:
+* Start the VM (Method recommended for Mac and Linux hosts) [#no_dev_option]_:
 
 .. code:: bash
 
@@ -83,6 +83,21 @@ Quick start
   composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-pe
   # for the Enterprise Edition
   composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-ee
+
+* Start the VM (Solving Windows-specific symlink issues with a vagrant-plugin):
+
+.. code:: bash
+  
+  Before vagrant up, install vagrant-winnfsd:
+
+  $ vagrant plugin install vagrant-winnfsd
+
+  Change the lines 50 and 57 of Vagrantfile to
+
+  sync_type = "nfs"
+
+  That enabled nfs usage on windows.
+  Finally, follow installation as described by the "Quicker Method" above.
 
 **Attention**: If you plan to facilitate the testing environment in your project, make sure that in your "config.inc.php" the setting "blDelSetupDir" is set to false. This prevents the setup folder from being deleted, which is needed for the shop resetting of the testing environment.
 
