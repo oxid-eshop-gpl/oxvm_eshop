@@ -70,7 +70,7 @@ Quick start
   composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
-* Start the VM (Method recommended for Mac and Linux hosts) [#no_dev_option]_:
+* Start the VM (Quicker method recommended for Mac and Linux hosts) [#no_dev_option]_:
 
 .. code:: bash
 
