@@ -23,7 +23,7 @@ mysql:
   password: oxid
   grants: "`oxid%`.*:ALL"
 php:
-  version: 7.4
+  version: 8.0
   zendguard:
     install: false
   packages:

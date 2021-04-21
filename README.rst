@@ -53,7 +53,7 @@ Quick start
 
 .. code:: bash
 
-  git clone -b b-6.2 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
+  git clone -b b-6.3 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
 * Start the VM (Robust method on Windows without Vagrant plugins which denies later "composer require"-s) [#no_dev_option]_:
 
@@ -63,11 +63,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ce
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-pe
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.2-ee
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
 * Start the VM (Quicker method recommended for Mac and Linux hosts) [#no_dev_option]_:
@@ -78,11 +78,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-ce
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-pe
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.2-ee
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-ee
 
 * Start the VM (Solving Windows-specific symlink issues with a vagrant-plugin):
 
@@ -207,7 +207,7 @@ However, it is possible to adjust the configuration of the virtual environment t
 All configuration changes should be done by overriding variables from:
 
 * `default.yml <https://github.com/OXID-eSales/oxvm_base/blob/master/ansible/vars/default.yml>`_ - base vm variables;
-* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/b-6.2/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
+* `oxideshop.yml <https://github.com/OXID-eSales/oxvm_eshop/blob/b-6.3/ansible/vars/oxideshop.yml>`_ - eShop specific variables.
 
 These overridden values must be placed in ``personal.yml``
 [#personal_git_ignore]_ file at the root level of current repository.
