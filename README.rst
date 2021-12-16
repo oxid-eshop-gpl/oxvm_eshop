@@ -53,7 +53,7 @@ Quick start
 
 .. code:: bash
 
-  git clone -b b-6.3 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
+  git clone -b b-6.4 --recursive https://github.com/OXID-eSales/oxvm_eshop.git
 
 * Start the VM (Robust method on Windows without Vagrant plugins which denies later "composer require"-s) [#no_dev_option]_:
 
@@ -63,11 +63,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-ce
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.4-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-pe
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.4-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.3-ee
+  composer create-project oxid-esales/oxideshop-project /tmp/oxideshop dev-b-6.4-ee
   cp -r /tmp/oxideshop /var/www && rm -rf /tmp/oxideshop
 
 * Start the VM (Quicker method recommended for Mac and Linux hosts) [#no_dev_option]_:
@@ -78,11 +78,11 @@ Quick start
   vagrant up
   vagrant ssh
   # for the Community Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-ce
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.4-ce
   # for the Professional Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-pe
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.4-pe
   # for the Enterprise Edition
-  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.3-ee
+  composer create-project oxid-esales/oxideshop-project /var/www/oxideshop dev-b-6.4-ee
 
 * Start the VM (Solving Windows-specific symlink issues with a vagrant-plugin):
 
